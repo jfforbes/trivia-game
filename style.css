@@ -1,9 +1,15 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: black;
+}
+
 body {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: black;
     color: #FF00FF;
     font-family: 'Press Start 2P', sans-serif;
 }
