@@ -16,6 +16,22 @@ body {
 
 .title{
     color: #33FFFF;
+    padding: 10px;
+}
+
+#category-select {
+    font-family: 'Press Start 2P', sans-serif;
+    color: #FF00FF;
+    background-color: black;
+    border: none;
+    padding: 10px;
+}
+
+#category-select option {
+    font-family: 'Press Start 2P', sans-serif;
+    color: #FF00FF;
+    background-color: black;
+    border: none;
 }
 
 .question {

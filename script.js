@@ -9,7 +9,12 @@ const question = document.getElementById("question");
 const feedback = document.getElementById("feedback");
 const questionButton = document.getElementById("new-question");
 const tempDiv = document.createElement("div");
+const categorySelect = document.getElementById("category-select");
 const buttons = [a1, a2, a3, a4];
+
+window.onload = function() {
+    getCategories();
+}
 
 
 questionButton.addEventListener("click", function(){
@@ -32,9 +37,29 @@ a4.addEventListener("click", function(){
     checkAnswer(a4.textContent);
 });
 
+function getCategories()
+{
+    fetch("https://opentdb.com/api_category.php")
+        .then (response => response.json())
+        .then (data => {
+            const categories = data.trivia_categories;
+            const select = document.getElementById("category-select");
+            categories.forEach((item) => {
+                const option = document.createElement("option");
+                option.value = item.id;
+                option.textContent = item.name;
+                select.append(option);
+            })
+        })
+}
+
 function getQuestion()
 {
-    fetch("https://opentdb.com/api.php?amount=1&type=multiple")
+    const selectedCategory = categorySelect.value;
+    let url = "https://opentdb.com/api.php?amount=1&type=multiple"
+    if (selectedCategory)
+        url +=`&category=${selectedCategory}`;
+    fetch(url)
         .then (response => response.json())
         .then (data => {
             buttons.forEach(button => {
