@@ -1,21 +1,24 @@
 let correct = "";
 let allAnswers = [];
+let score = 0;
+let totalQuestions = 0;
 
 const a1 = document.getElementById("answer-1");
 const a2 = document.getElementById("answer-2");
 const a3 = document.getElementById("answer-3");
 const a4 = document.getElementById("answer-4");
+const scoreDisplay = document.getElementById("score");
 const question = document.getElementById("question");
 const feedback = document.getElementById("feedback");
 const questionButton = document.getElementById("new-question");
 const tempDiv = document.createElement("div");
 const categorySelect = document.getElementById("category-select");
 const buttons = [a1, a2, a3, a4];
+const randomButton = document.getElementById("randomize");
 
 window.onload = function() {
     getCategories();
 }
-
 
 questionButton.addEventListener("click", function(){
     getQuestion();
@@ -37,19 +40,23 @@ a4.addEventListener("click", function(){
     checkAnswer(a4.textContent);
 });
 
+randomButton.addEventListener("click", function(){
+    selectRandomCategory();
+});
+
 function getCategories()
 {
     fetch("https://opentdb.com/api_category.php")
         .then (response => response.json())
         .then (data => {
             const categories = data.trivia_categories;
-            const select = document.getElementById("category-select");
             categories.forEach((item) => {
                 const option = document.createElement("option");
                 option.value = item.id;
                 option.textContent = item.name;
-                select.append(option);
+                categorySelect.append(option);
             })
+            
         })
 }
 
@@ -117,13 +124,24 @@ function placeInButtons(answers)
 
 function checkAnswer(answer)
 {
+    totalQuestions++;
+    if (answer === correct)
+    {
+        score++;
+    }
     for (let i = 0; i < buttons.length; i++) {
         if (buttons[i].textContent === correct) {
             buttons[i].classList.add("correct");
         } else {
-            buttons[i].classList.add("incorrect");
+            buttons[i].classList.add("incorrect");   
         }
         buttons[i].classList.add("no-hover");
     }
+    scoreDisplay.textContent = score + "/" + totalQuestions;
+}
 
+function selectRandomCategory()
+{
+    let randomIndex = Math.floor(Math.random() * (categorySelect.length - 1)) + 1;
+    categorySelect.value = categorySelect.options[randomIndex].value;
 }

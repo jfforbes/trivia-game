@@ -17,11 +17,15 @@ body {
 .title{
     color: #33FFFF;
     padding: 10px;
+    font-size: x-large;
+    line-height: 1;
+    margin: 0;
 }
 
 #category-select {
+    border-radius: 8px;
     font-family: 'Press Start 2P', sans-serif;
-    color: #FF00FF;
+    color: #CCCCCC;
     background-color: black;
     border: none;
     padding: 10px;
@@ -29,7 +33,7 @@ body {
 
 #category-select option {
     font-family: 'Press Start 2P', sans-serif;
-    color: #FF00FF;
+    color: #8A2BE2;
     background-color: black;
     border: none;
 }
@@ -97,4 +101,8 @@ button.no-hover{
 
 .incorrect{
     background-color: red;
+}
+
+#score-div{
+    padding: 10px;
 }
